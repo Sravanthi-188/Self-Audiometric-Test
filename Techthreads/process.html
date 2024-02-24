@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automatic Moving Progress Bars</title>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    .progress-bar {
+        transition: width 1s ease-in-out;
+        
+    }
+    #progressText
+    {
+        color: rgb(0, 0, 0);
+        font-size: 40px;
+        margin: 60PX;
+    }
+</style>
+</head>
+<body style="background-color:rgb(255, 228, 196);">
+
+<div class="container mt-5">
+    <div class="progress">
+        <div class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <p id="progressText" style="text-align: center;">Processing...</p>
+    <button id="viewButton" class="btn btn-primary disabled" style="display: none;margin-left: 45%;margin-right:45%;margin-top: 20%;background-color: #32bbd0;color: white;width: 160px;">Click to view your REPORT</button>
+</div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var progressBar = document.querySelector('.progress-bar');
+            var progressText = document.getElementById('progressText');
+            var viewButton = document.getElementById('viewButton');
+            var width = 0;
+            var interval = setInterval(function() {
+                width += 10; // Increment progress bar width
+                progressBar.style.width = width + '%';
+                progressBar.setAttribute('aria-valuenow', width);
+                if (width >= 100) {
+                    clearInterval(interval); // Stop interval when width reaches 100%
+                    progressText.textContent = 'Processed';
+                    viewButton.classList.remove('disabled');
+                    viewButton.style.display = 'block';
+                }
+            }, 1000); // Interval time in milliseconds (1000ms = 1 second)
+    
+            // Add event listener to the viewButton
+            viewButton.addEventListener('click', function() {
+                // Navigate to final.html
+                window.location.href = 'final.html';
+            });
+        });
+    </script>
+    
+</body>
+</html>

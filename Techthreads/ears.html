@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body{
+      background-color: rgba(250, 190, 117, 0.775);
+    }
+    a
+    {
+      text-decoration: none;
+    }
+    div {
+      width: 300px;
+      padding: 10px;
+      margin: 0;
+      text-align: center;
+      padding: 30px;
+      color: green;
+    }
+    .container {
+      text-align: center;
+      width: 100%;
+      height: 100%;
+      margin: auto;
+      font-size: large;
+    }
+
+    .circle {
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: lightblue;
+      text-align: center;
+      line-height: 100px;
+      margin-right: 10px;
+      text-decoration: none;
+      color: black;
+    }
+
+    #leftear { background-color: lightgreen; }
+    #rightear { background-color: lightcoral; }
+    #bothears { background-color: lightsalmon; }
+    .instruction-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .instruction-box {
+      background-color: white;
+      padding: 5px;
+      border-radius: 0px;
+      width: 200px;
+      text-align: center;
+      margin: 0px;
+    }
+
+    button {
+      width: 180px;
+      height: 40px;
+      border-radius: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+      border: none;
+      text-decoration: none;
+      cursor: pointer;
+      margin: -40px;
+    }
+
+    button:disabled {
+      background-color: black;
+      cursor: not-allowed;
+    }
+    #left
+    {
+      background-color: lightgreen;
+    }
+    #left:hover
+    {
+      background-color: rgba(250, 190, 117, 0.775);;
+    }
+    #right
+    {
+      background-color: lightcoral ;
+    }
+    #right:hover
+    {
+      background-color: rgba(250, 190, 117, 0.775);;
+    }
+    #both
+    {
+      background-color: lightsalmon;
+    }
+    #both:hover
+    {
+      background-color: rgba(250, 190, 117, 0.775);;
+    }
+  </style>
+  <title>Hearing Test Page</title>
+</head>
+<body>
+  <div class="container border">
+    <div class="circle" id="leftear">
+      <button id="left"selectEar('leftear')">LeftEar</button>
+    </div>
+    <div class="circle" id="rightear">
+      <button id="right" onclick="selectEar('rightear')">RightEar</button>
+    </div>
+    <div class="circle" id="bothears">
+      <button id="both" onclick="selectEar('bothears')">BothEars</button>
+    </div>
+    <center>
+      <div class="instruction-container">
+        <h4>Instructions:</h4>
+        <div class="instruction-box">
+          <p>1. Connect Headphones.</p>
+        </div>
+        <div class="instruction-box">
+          <p>2. Sit in a quiet place.</p>
+        </div>
+        <div class="instruction-box">
+          <p>3. Get Hearing Test Report.</p>
+        </div>
+      </div>
+    </center>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="Headphones connected" name="Connected">
+    <label for="hearingCheck1">Headphones connected</label>
+    <br>
+    <input type="checkbox" id="Sit in a quiet place" name="Quiet">
+    <label for="hearingCheck2">Sit in a quiet place</label>
+    <br>
+    <br>
+    <button style="background-color:#32bbd0;width: 180px;height: 40px;border-radius: 20px;font-size: 20px;font-weight: bold;color: white;border: none;"><a href="test.html">Take Test</a></button>
+  </div>
+
+  <script>
+    function selectEar(ear) {
+      document.getElementById('leftear').classList.remove('selected');
+      document.getElementById('rightear').classList.remove('selected');
+      document.getElementById('bothears').classList.remove('selected');
+
+      document.getElementById(ear).classList.add('selected');
+
+      // Disable the checkboxes based on selection
+      if (ear === 'leftear') {
+        document.getElementById('rightear').querySelector('button').disabled = true;
+        document.getElementById('bothears').querySelector('button').disabled = true;
+      } else if (ear === 'rightear') {
+        document.getElementById('leftear').querySelector('button').disabled = true;
+        document.getElementById('bothears').querySelector('button').disabled = true;
+      } else if (ear === 'bothears') {
+        document.getElementById('leftear').querySelector('button').disabled = true;
+        document.getElementById('rightear').querySelector('button').disabled = true;
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Line Chart Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: rgb(250, 190, 117,0.775);
+        }
+        #chartContainer {
+            width: 600px;
+            height: 600px;
+            background-color: rgb(232, 206, 233);
+            position: relative;
+        }
+        #saveButton {
+            position: absolute;
+            right: -35%;
+            top: 50%;
+            transform: translate(50%, -50%);
+            width: 150px;
+            height: 50px;
+            font-size: 20px;
+            background-color: #32bbd0;
+            color: aliceblue;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        label
+        {
+            text-transform:uppercase;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Here is your Report!!!</h1>
+    <div id="chartContainer">
+        <canvas id="myChartCanvas"></canvas>
+        <button id="saveButton">Save Report</button>
+    </div>
+    <h3 style="text-align: center;">Your hearing is <label>Normal</label>.</h3>
+
+<script>
+    var ctx = document.getElementById('myChartCanvas').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['250 Hz', '500 Hz', '1000 Hz', '2000 Hz', '4000 Hz', '8000 Hz'], 
+            datasets: [{
+                label: 'Left ear',
+                data: [15, 20, 15, 15, 10, 0], 
+                borderColor: 'red',
+                backgroundColor: 'blue',
+                tension: 0.1 
+            },
+            {
+                label: 'Right ear',
+                data: [20, 15, 10, 15, 15, 15],
+                borderColor: 'blue',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                tension: 0.1 
+            }]
+        },
+        options: {
+            maintainAspectRatio: false, 
+            responsive: true, 
+            scales: {
+                y: {
+                    min: -10, 
+                    max: 110, 
+                    reverse: true, 
+                    beginAtZero: false, 
+                    title: {
+                        display: true,
+                        text: 'Volume', 
+                        font: {
+                            weight: 'bold' 
+                        }
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Frequency',
+                        font: {
+                            weight: 'bold' 
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    document.getElementById('saveButton').addEventListener('click', function() {
+        var canvas = document.getElementById('myChartCanvas');
+        var image = canvas.toDataURL('image/png');
+        var a = document.createElement('a');
+        a.href = image;
+        a.download = 'chart.png';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    });
+</script>
+</body>
+</html>
